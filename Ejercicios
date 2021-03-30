@@ -1,0 +1,493 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace RepasoCSharp
+{
+    class Repaso
+    {
+
+        public void OperacionesBasicas()
+        {
+            // OPERACIONES ARITMETICAS BASICAS
+            int NUM1, NUM2, RESUL;
+            string linea;
+
+            Console.Write("PRIMER NÚMERO :");
+            linea = Console.ReadLine();
+            NUM1 = int.Parse(linea);
+
+            Console.Write("SEGUNDO NÚMERO :");
+            linea = Console.ReadLine();
+            NUM2 = int.Parse(linea);
+            Console.WriteLine();
+
+            RESUL = NUM1 + NUM2;
+            Console.WriteLine("LA SUMA ES {0}: ", RESUL);
+
+            RESUL = NUM1 - NUM2;
+            Console.WriteLine("LA RESTA ES: {0} - {1} = {2} ", NUM1, NUM2, RESUL);
+
+            RESUL = NUM1 * NUM2;
+            Console.WriteLine("LA MULTIPLICACIÓN ES: " + RESUL);
+
+            RESUL = NUM1 / NUM2;
+            Console.WriteLine("LA DIVISIÓN ES: " + RESUL);
+
+            RESUL = NUM1 % NUM2;
+            Console.WriteLine("EL RESIDUO ES: " + RESUL);
+
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+
+
+        public void CompraEnRestaurant()
+        {
+            // Calcula el total de la compra de cada item
+            byte CantBebida, CantHamburguesa, CantPapas;
+            double APagar;
+            string linea;
+
+            const double PrecioB = 0.8;
+            const double PrecioH = 2;
+            const double PrecioP = 1.2;
+
+            Console.Write("CANTIDAD DE HAMBURGUESAS :"); linea = Console.ReadLine();
+            CantHamburguesa = byte.Parse(linea);
+
+            Console.Write("CANTIDAD DE PAPAS :"); linea = Console.ReadLine();
+            CantPapas = byte.Parse(linea);
+
+            Console.Write("CANTIDAD DE BEBIDAS :"); linea = Console.ReadLine();
+            CantBebida = byte.Parse(linea);
+            Console.WriteLine();
+
+            APagar = (CantHamburguesa * PrecioH) + (CantPapas * PrecioP) + (CantBebida * PrecioB);
+            Console.WriteLine("VALOR A PAGAR: " + APagar);
+
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+
+        public void MayorDeDosNumeros()
+        {
+            // Se ingresan dos numeros y se muestra el mayor, el menor o si son iguales
+            int NUM1, NUM2;
+            string linea;
+
+            Console.Write("NÚMERO 1 :"); linea = Console.ReadLine();
+            NUM1 = int.Parse(linea);
+            Console.Write("NÚMERO 2 :"); linea = Console.ReadLine();
+            NUM2 = int.Parse(linea);
+            if ((NUM1 > NUM2))
+            {
+                Console.WriteLine("{0} ES MAYOR QUE {1}", NUM1, NUM2);
+            }
+            else
+            {
+                if ((NUM1 == NUM2))
+                {
+                    Console.WriteLine("{0} ES IGUAL A {1}", NUM1, NUM2);
+                }
+                else
+                {
+                    Console.WriteLine("{0} ES MENOR QUE {1}", NUM1, NUM2);
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine("OTRA MANERA");
+            string RESUL;
+            if (NUM1 > NUM2)
+            {
+                RESUL = "MAYOR";
+            }
+            else
+            if (NUM1 == NUM2)
+            {
+                RESUL = "IGUAL";
+            }
+            else
+            {
+                RESUL = "MENOR";
+            }
+
+            Console.WriteLine("{0} ES {1} QUE {2}", NUM1, RESUL, NUM2);
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+
+        }
+        public void DesgloseBilletes()
+        {
+            //Dado un importe, indica la cantidad de billetes de cada valor
+            //para llegar a ese importe
+            int CAN, C100, C50, C20, C10, C5;
+            C100 = 0;
+            C50 = 0;
+            C20 = 0;
+            C10 = 0;
+            C5 = 0;
+            string linea;
+
+            Console.Write("DIGITE UNA CANTIDAD :"); linea = Console.ReadLine();
+            CAN = int.Parse(linea);
+
+            if ((CAN >= 100))
+            {
+                C100 = (CAN / 100);
+                CAN = CAN - (C100 * 100);
+            }
+            if ((CAN >= 50))
+            {
+                C50 = (CAN / 50);
+                CAN = CAN - (C50 * 50);
+            }
+            if ((CAN >= 20))
+            {
+                C20 = (CAN / 20);
+                CAN = CAN - (C20 * 20);
+            }
+            if ((CAN >= 10))
+            {
+                C10 = (CAN / 10);
+                CAN = CAN - (C10 * 10);
+            }
+            if ((CAN >= 5))
+            {
+                C5 = (CAN / 5);
+                CAN = CAN - (C5 * 5);
+            }
+            Console.WriteLine("BILLETES DE A 100: " + C100);
+            Console.WriteLine("BILLETES DE A 50 : " + C50);
+            Console.WriteLine("BILLETES DE A 20 : " + C20);
+            Console.WriteLine("BILLETES DE A 10 : " + C10);
+            Console.WriteLine("BILLETES DE A 5 : " + C5);
+            Console.WriteLine("BILLETES DE A 1 : " + CAN);
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+
+        public void Triangulos()
+        {
+            //Según el tamaño de los datos, indica si el triángulo es
+            //equilátero, isósceles o escaleno
+            int LADO1, LADO2, LADO3;
+            string linea;
+
+            Console.Write("DIGITE LADO 1 :"); linea = Console.ReadLine();
+            LADO1 = int.Parse(linea);
+            Console.Write("DIGITE LADO 2 :"); linea = Console.ReadLine();
+            LADO2 = int.Parse(linea);
+            Console.Write("DIGITE LADO 3 :"); linea = Console.ReadLine();
+            LADO3 = int.Parse(linea);
+
+            if ((LADO1 == LADO2) & (LADO2 == LADO3))
+            {
+                Console.WriteLine("TRIÁNGULO EQUILÁTERO. TODOS IGUALES");
+            }
+            else
+            {
+                if ((LADO1 != LADO2) & (LADO1 != LADO3) & (LADO2 != LADO3))
+                {
+                    Console.WriteLine("TRIÁNGULO ESCALENO. NINGUNO IGUAL");
+                }
+                else
+                {
+                    Console.WriteLine("TRIÁNGULO ISÓSCELES. DOS IGUALES");
+                }
+            }
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+        public void DiasSemana()
+        {
+            //Según el número de día de la semana, muestra su nombre
+            int num;
+            string linea;
+
+            Console.WriteLine();
+            Console.WriteLine("DIAS DE LA SEMANA");
+            Console.WriteLine();
+            Console.Write("Ingrese un numero del 1 al 7 :");
+            linea = Console.ReadLine();
+            num = int.Parse(linea);
+
+            switch (num)
+            {
+                case 1:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia DOMINGO");
+                    break;
+                case 2:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia LUNES");
+                    break;
+                case 3:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia MARTES");
+                    break;
+                case 4:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia MIERCOLES");
+                    break;
+                case 5:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia JUEVES");
+                    break;
+                case 6:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia VIERNES");
+                    break;
+                case 7:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso corresponde al dia SABADO");
+                    break;
+                default:
+                    Console.WriteLine();
+                    Console.WriteLine("El numero que ingreso esta fuera de rango");
+                    break;
+            }
+            Console.ReadKey();
+
+        }
+        public void TablaMultiplicarConFor()
+        {
+            //Muestra la tabla de multiplicar de un número
+            byte NUM, I;
+            int RESUL;
+            string linea;
+
+            Console.Write("DIGITE NÚMERO:"); linea = Console.ReadLine();
+            NUM = byte.Parse(linea);
+
+            for (I = 1; I <= 12; I++)
+            {
+                RESUL = NUM * I;
+                Console.WriteLine("{0} * {1} = {2}", NUM, I, RESUL);
+            }
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+
+        public void TablaMultiplicarConWhile()
+        {
+            //Muestra la tabla de multiplicar de un número
+            int NUM, I, RESUL;
+            string linea;
+            Console.Write("DIGITE NÚMERO:"); linea = Console.ReadLine();
+            NUM = int.Parse(linea);
+            I = 1;
+            while ((I <= 12))
+            {
+                RESUL = NUM * I;
+                Console.WriteLine("{0} * {1} = {2}", NUM, I, RESUL);
+                I = I + 1;
+            }
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+
+
+        public void SumaDeNNumeros()
+        {
+            //Suma N números ingresados
+            byte CAN, K;
+            int NUM;
+            int SUM = 0;
+            string linea;
+
+            Console.Write("LÍMITE:"); linea = Console.ReadLine();
+            CAN = byte.Parse(linea);
+
+            for (K = 1; K <= CAN; K++)
+            {
+                Console.Write("DIGITE UN NÚMERO:"); linea = Console.ReadLine();
+                NUM = int.Parse(linea);
+                SUM += NUM;
+            }
+            Console.WriteLine("SUMA TOTAL ES : " + SUM);
+            Console.WriteLine("MEDIA ARITMÉTICA: " + SUM / CAN);
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+        public void FuncionesCadena()
+        {
+            //Dado un string ingresado, se le aplican diversas funciones
+            //para manejo de string que tiene .Net
+            //También se invocan dos funciones propias, con parámetros
+            string NOM;
+            byte K;
+            Console.Write("DIGITE SU NOMBRE : "); NOM = Console.ReadLine();
+
+            try
+            {
+                Console.WriteLine("LONGITUD : " + NOM.Length);
+                Console.WriteLine("ESTA DENTRO : " + NOM.Contains("ARIEL"));
+                Console.WriteLine("REEMPLAZO VOCAL A: " + NOM.Replace("A", "X"));
+                Console.WriteLine("EN MINUSCULAS : " + NOM.ToLower());
+                Console.WriteLine("EN MAYÚSCULAS : " + NOM.ToUpper());
+                Console.WriteLine("REMOVER 4 LETRAS : " + NOM.Remove(3, 4));
+                Console.WriteLine("EXTRAER 4 LETRAS : " + NOM.Substring(3, 4));
+                Console.WriteLine("IZQUIERDA 4 LETRAS : " + Left(NOM, 4));
+                Console.WriteLine("DERECHA 4 LETRAS : " + Right(NOM, 4));
+                Console.Write("Pulse una Tecla:"); Console.ReadLine();
+                Console.WriteLine();
+
+                Console.WriteLine("DESDE LA IZQUIERDA");
+                for (K = 1; K <= NOM.Length; K++)
+                {
+                    Console.WriteLine(Left(NOM, K));
+                }
+                Console.WriteLine();
+                Console.WriteLine("DESDE LA DERECHA");
+                for (K = 1; K <= NOM.Length; K++)
+                {
+                    Console.WriteLine(Right(NOM, K));
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error en la función, porque la cadena tiene pocos caracteres.");
+                Console.WriteLine("Intente con una cadena de más caracteres.");
+                Console.WriteLine();
+            }
+            Console.Write("Pulse una Tecla:");
+            Console.ReadKey();
+        }
+        public static string Left(string param, int length)
+        {
+            string result = param.Substring(0, length);
+            return result;
+        }
+        public static string Right(string param, int length)
+        {
+            int value = param.Length - length;
+            string result = param.Substring(value, length);
+            return result;
+        }
+
+        public void NumeroPrimo()
+        {
+            //Dado un número, indica si es primo
+            int n, x, sw, resi;
+            string linea;
+            x = 2;
+            sw = 0;
+
+            Console.WriteLine("NUMERO PRIMO");
+            Console.WriteLine();
+            Console.Write("Ingrese el numero:");
+
+            linea = Console.ReadLine();
+            n = int.Parse(linea);
+
+            while (x < n && sw == 0)
+            {
+                resi = n % x;
+                if (resi == 0)
+                {
+                    sw = 1;
+                }
+                else
+                {
+                    x = x + 1;
+                }
+            }
+            if (sw == 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("El numero es PRIMO");
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine("El numero no es PRIMO");
+            }
+            Console.ReadKey();
+        }
+
+        public void Arreglo()
+        {
+            // FORMA 1
+            // asignando valores al array al mismo tiempo que se declara,
+            // la lista de valores debe ir encerrada entre llaves
+            string[] VECTOR = { "LORENA", "ESTEBAN", "ARIEL" };
+            byte K = 0;
+            for (K = 0; K <= 2; K++)
+            {
+                Console.WriteLine(VECTOR[K]);
+            }
+            Console.WriteLine();
+
+            // FORMA 2
+            // declarar primero la variable que contendrá el array,
+            // asignar valores al array al mismo tiempo que se instancia
+            // la lista de valores debe ir encerrada entre llaves
+            int[] MILISTA = null;
+            MILISTA = new int[] { 15, 20, 30, 10, 50, 60, 10, 150, 69 };
+
+            for (K = 0; K <= MILISTA.Length - 1; K++)
+            {
+                Console.WriteLine(MILISTA[K]);
+            }
+            Console.WriteLine();
+            Console.Write("Pulse una Tecla:");
+            Console.ReadLine();
+        }
+        public void Matriz()
+        {
+            //Muestra el número mayor y menor de una matriz
+            int F = 0;
+            int C = 0;
+            int N = 0;
+            int MAY = 0;
+            int MEN = 0;
+            string linea;
+
+            // INGRESO
+            // PARA COMODIDAD GENERAMOS VALORES PARA LA MATRIZ
+            Console.Write("TAMAÑO DE LA MATRIZ:");
+            Random rnd = new Random();
+            linea = Console.ReadLine();
+            N = int.Parse(linea);
+
+            Console.Clear();
+
+            int[,] MAT = new int[N + 1, N + 1];
+            for (F = 1; F <= N; F++)
+            {
+                for (C = 1; C <= N; C++)
+                {
+                    MAT[F, C] = rnd.Next(0, 99);
+                    Console.SetCursorPosition(C * 4, F + 1);
+                    Console.Write(MAT[F, C]);
+                }
+            }
+            // PROCESO
+
+            MAY = MAT[1, 1];
+            MEN = MAT[1, 1];
+            for (F = 1; F <= N; F++)
+            {
+                for (C = 1; C <= N; C++)
+                {
+                    if ((MAT[F, C] > MAY))
+                        MAY = MAT[F, C];
+                    if ((MAT[F, C] < MEN))
+                        MEN = MAT[F, C];
+                }
+            }
+            // SALIDA
+            Console.WriteLine();
+            Console.WriteLine("NÚMERO MAYOR ES: " + MAY);
+            Console.WriteLine("NÚMERO MENOR ES: " + MEN);
+            Console.Write("Pulse una Tecla:");
+            Console.ReadLine();
+
+        }
+    }
+
+
+}
