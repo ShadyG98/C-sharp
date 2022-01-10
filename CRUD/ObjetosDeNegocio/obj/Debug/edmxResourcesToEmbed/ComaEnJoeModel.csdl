@@ -1,0 +1,260 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ComaEnJoeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cheffs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Especialidad" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_Cheffs" FromRole="Cheffs" ToRole="Platos" />
+  </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Alias" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="ClientesDatosAdicionales" Relationship="Self.FK_ClientesDatosAdicionales_Clientes" FromRole="Clientes" ToRole="ClientesDatosAdicionales" />
+  </EntityType>
+  <EntityType Name="ClientesDatosAdicionales">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCliente" Type="Int32" Nullable="false" />
+    <Property Name="Domicilio" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Clientes" Relationship="Self.FK_ClientesDatosAdicionales_Clientes" FromRole="ClientesDatosAdicionales" ToRole="Clientes" />
+  </EntityType>
+  <EntityType Name="Mesas">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Mesa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="TipoMesa" Type="Int32" Nullable="false" />
+    <Property Name="CantidadPersonas" Type="Byte" Nullable="false" />
+    <NavigationProperty Name="MesasTipos" Relationship="Self.FK_Mesas_MesasTipos" FromRole="Mesas" ToRole="MesasTipos" />
+    <NavigationProperty Name="MesasPorSalon" Relationship="Self.FK_MesasPorSalon_Mesas" FromRole="Mesas" ToRole="MesasPorSalon" />
+  </EntityType>
+  <EntityType Name="MesasPorSalon">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Salon" Type="Int32" Nullable="false" />
+    <Property Name="Mesa" Type="Int32" Nullable="false" />
+    <Property Name="Libre" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Mesas" Relationship="Self.FK_MesasPorSalon_Mesas" FromRole="MesasPorSalon" ToRole="Mesas" />
+    <NavigationProperty Name="Salones" Relationship="Self.FK_MesasPorSalon_Salones" FromRole="MesasPorSalon" ToRole="Salones" />
+    <NavigationProperty Name="Pedidos" Relationship="Self.FK_Pedidos_MesasPorSalon" FromRole="MesasPorSalon" ToRole="Pedidos" />
+  </EntityType>
+  <EntityType Name="MesasTipos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoMesa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Mesas" Relationship="Self.FK_Mesas_MesasTipos" FromRole="MesasTipos" ToRole="Mesas" />
+  </EntityType>
+  <EntityType Name="Pedidos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MesaSalon" Type="Int32" Nullable="false" />
+    <Property Name="Plato" Type="Int32" Nullable="false" />
+    <Property Name="Adicional1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adicional2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Adicional3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MesasPorSalon" Relationship="Self.FK_Pedidos_MesasPorSalon" FromRole="Pedidos" ToRole="MesasPorSalon" />
+    <NavigationProperty Name="Platos" Relationship="Self.FK_Pedidos_Platos" FromRole="Pedidos" ToRole="Platos" />
+  </EntityType>
+  <EntityType Name="Platos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NombrePlato" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TipoPlato" Type="Int32" Nullable="false" />
+    <Property Name="Cheff" Type="Int32" Nullable="false" />
+    <Property Name="TiempoPreparacion" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="RutaFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cheffs" Relationship="Self.FK_Platos_Cheffs" FromRole="Platos" ToRole="Cheffs" />
+    <NavigationProperty Name="Pedidos" Relationship="Self.FK_Pedidos_Platos" FromRole="Platos" ToRole="Pedidos" />
+    <NavigationProperty Name="PlatosTipos" Relationship="Self.FK_Platos_PlatosTipos" FromRole="Platos" ToRole="PlatosTipos" />
+  </EntityType>
+  <EntityType Name="PlatosTipos">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TipoPlato" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Platos" Relationship="Self.FK_Platos_PlatosTipos" FromRole="PlatosTipos" ToRole="Platos" />
+  </EntityType>
+  <EntityType Name="Salones">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Salon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="MesasPorSalon" Relationship="Self.FK_MesasPorSalon_Salones" FromRole="Salones" ToRole="MesasPorSalon" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Platos_Cheffs">
+    <End Role="Cheffs" Type="Self.Cheffs" Multiplicity="1" />
+    <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cheffs">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Platos">
+        <PropertyRef Name="Cheff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientesDatosAdicionales_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="ClientesDatosAdicionales" Type="Self.ClientesDatosAdicionales" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClientesDatosAdicionales">
+        <PropertyRef Name="IDCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mesas_MesasTipos">
+    <End Role="MesasTipos" Type="Self.MesasTipos" Multiplicity="1" />
+    <End Role="Mesas" Type="Self.Mesas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesasTipos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Mesas">
+        <PropertyRef Name="TipoMesa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MesasPorSalon_Mesas">
+    <End Role="Mesas" Type="Self.Mesas" Multiplicity="1" />
+    <End Role="MesasPorSalon" Type="Self.MesasPorSalon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mesas">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MesasPorSalon">
+        <PropertyRef Name="Mesa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MesasPorSalon_Salones">
+    <End Role="Salones" Type="Self.Salones" Multiplicity="1" />
+    <End Role="MesasPorSalon" Type="Self.MesasPorSalon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Salones">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MesasPorSalon">
+        <PropertyRef Name="Salon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_MesasPorSalon">
+    <End Role="MesasPorSalon" Type="Self.MesasPorSalon" Multiplicity="1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MesasPorSalon">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="MesaSalon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Pedidos_Platos">
+    <End Role="Platos" Type="Self.Platos" Multiplicity="1" />
+    <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Platos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Pedidos">
+        <PropertyRef Name="Plato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Platos_PlatosTipos">
+    <End Role="PlatosTipos" Type="Self.PlatosTipos" Multiplicity="1" />
+    <End Role="Platos" Type="Self.Platos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PlatosTipos">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Platos">
+        <PropertyRef Name="TipoPlato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ComaEnJoeDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cheffs" EntityType="Self.Cheffs" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+    <EntitySet Name="ClientesDatosAdicionales" EntityType="Self.ClientesDatosAdicionales" />
+    <EntitySet Name="Mesas" EntityType="Self.Mesas" />
+    <EntitySet Name="MesasPorSalon" EntityType="Self.MesasPorSalon" />
+    <EntitySet Name="MesasTipos" EntityType="Self.MesasTipos" />
+    <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
+    <EntitySet Name="Platos" EntityType="Self.Platos" />
+    <EntitySet Name="PlatosTipos" EntityType="Self.PlatosTipos" />
+    <EntitySet Name="Salones" EntityType="Self.Salones" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Platos_Cheffs" Association="Self.FK_Platos_Cheffs">
+      <End Role="Cheffs" EntitySet="Cheffs" />
+      <End Role="Platos" EntitySet="Platos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientesDatosAdicionales_Clientes" Association="Self.FK_ClientesDatosAdicionales_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="ClientesDatosAdicionales" EntitySet="ClientesDatosAdicionales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mesas_MesasTipos" Association="Self.FK_Mesas_MesasTipos">
+      <End Role="MesasTipos" EntitySet="MesasTipos" />
+      <End Role="Mesas" EntitySet="Mesas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MesasPorSalon_Mesas" Association="Self.FK_MesasPorSalon_Mesas">
+      <End Role="Mesas" EntitySet="Mesas" />
+      <End Role="MesasPorSalon" EntitySet="MesasPorSalon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MesasPorSalon_Salones" Association="Self.FK_MesasPorSalon_Salones">
+      <End Role="Salones" EntitySet="Salones" />
+      <End Role="MesasPorSalon" EntitySet="MesasPorSalon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_MesasPorSalon" Association="Self.FK_Pedidos_MesasPorSalon">
+      <End Role="MesasPorSalon" EntitySet="MesasPorSalon" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Pedidos_Platos" Association="Self.FK_Pedidos_Platos">
+      <End Role="Platos" EntitySet="Platos" />
+      <End Role="Pedidos" EntitySet="Pedidos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Platos_PlatosTipos" Association="Self.FK_Platos_PlatosTipos">
+      <End Role="PlatosTipos" EntitySet="PlatosTipos" />
+      <End Role="Platos" EntitySet="Platos" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
